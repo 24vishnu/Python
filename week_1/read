@@ -1,0 +1,5 @@
+git init
+git add Python_work
+git commit -m "Day_Three"
+git remote add origin https://github.com/24vishnu/Python_Django_Task.git
+git push -u origin master
