@@ -1,3 +1,8 @@
+# ---------------------------------- prg-----------------------------------------------
+# Array2D.py
+# date : 26/08/2019
+# write into the file in form of 2D array
+
 def method2D(n,m):
     # we take a empty list name array_2D initially this is empty
 	array_2D = [] 								

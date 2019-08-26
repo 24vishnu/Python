@@ -1,3 +1,9 @@
+# ---------------------------------- prg-----------------------------------------------
+# Coupon_Number.py
+# date : 26/08/2019
+# Generate unique N numbers
+
+
 import random
 
 '''

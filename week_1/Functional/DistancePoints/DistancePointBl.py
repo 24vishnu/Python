@@ -1,3 +1,9 @@
+# ---------------------------------- prg-----------------------------------------------
+# DistancePoint.py
+# date : 26/08/2019
+# find the distance between two points
+
+
 #import math package for use mathematical functions like (square function, root function and other)
 import math
 

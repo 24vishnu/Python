@@ -1,3 +1,9 @@
+# ---------------------------------- prg-----------------------------------------------
+# priem2DPrime.py
+# date : 26/08/2019
+# print the prime number in two dimension 
+
+
 class Queue:
     #Constructor
     def __init__(self,cap = None):
@@ -8,6 +14,7 @@ class Queue:
         self.front = 0
         self.rear = 0
         self.queue = [-1]*self.capasity
+
     #Enqueue
     def enQueue(self,item):
         if self.rear == self.capasity:
@@ -15,6 +22,7 @@ class Queue:
             return
         self.queue[self.rear] = item
         self.rear += 1
+
     #Dequeue
     def deQueue(self):
         if self.rear == self.front:
@@ -25,9 +33,11 @@ class Queue:
             self.queue[i] = self.queue[i+1]
         self.rear -= 1
         return data
+
     #IsEmpty
     def isEmpty(self):
         return self.front == self.rear
+
     #size
     def size(self):
         return (self.rear - self.front)
@@ -35,18 +45,23 @@ class Queue:
     # program function:
     def remaining_mony(self,currentMoney,total_people):
         q = Queue()
+
         for i in range(total_people):
             q.enQueue(currentMoney//total_people)
+
         print("Enter as following instructions: \n1 : withdraw \n2 : Deposite\n\t")
         total_money = currentMoney
 
         for i in range(total_people):
             print(q.size())
+
             print(i+1," : What you want withdraw or Deposite money : ")
             reply = int(input())
+
             if reply == 1:
                 print('Enter your ammount : ')
                 amont = int(input())
+
                 if(amont > total_money//total_people):
                     print('You have unsuficient amount in your account : ')
                     print('Your current ammount is : ',q.deQueue())
@@ -63,14 +78,5 @@ class Queue:
                 currentMoney = currentMoney + amont
                 print('Your current ammount is : ',q.deQueue() + amont)
                 # q.deQueue()
+                
         return currentMoney
-
-
-print('How many people in queue : ')
-quSize = int(input())
-qu = Queue(quSize)
-print('Hi.. Manager what is the total money today in bank : ')
-bankBalance = int(input())
-remaningCase = qu.remaining_mony(bankBalance,quSize)
-print('now remaining money in the bank is : ',remaningCase)
-

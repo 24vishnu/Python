@@ -1,23 +1,16 @@
+#program is take the data from file and and sort using insertion sort
+
 import SortingFunctionsBL as ob
 
+#Open the file 
 # f=open("demo.txt",'r')
 with open("demo.txt") as f:
-	data = f.read()
-	ob.sortinLogic(data)
-# word = ""
-# string = data.strip().strip('.').strip(',')
-# list_obj = []
-# # print(string)
-# for i in range(len(string)):
-# 	if(string[i] == ' '):
-# 		if(len(word) > 0):
-# 			list_obj.append(word)
-# 			word = ""
-# 	elif((string[i] >= 'a' and string[i] <= 'z') or (string[i] >= 'A' and string[i] <= 'Z')):
-# 		word += string[i]
-# if(len(word) > 0):
-# 	list_obj.append(word)
 
-# print("\n")
-# print(ob.insertionSort(list_obj))
+	#read the data
+	data = f.read()
+	
+	#sort the data
+	ob.sortinLogic(data)
+	
+#close the file
 f.close()
