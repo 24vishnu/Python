@@ -1,0 +1,32 @@
+{
+ "amdocs": {
+  "share": 8,
+  "amount": 1023,
+  "time": "Fri Aug 30 15:24:24 2019"
+ },
+ "varitas": {
+  "share": 10,
+  "amount": 500,
+  "time": "Thu Aug 29 10:21:38 2019"
+ },
+ "Lemnisk1": {
+  "share": 1,
+  "amount": 500,
+  "time": "2019-08-28 15:35:28.028739"
+ },
+ "StateBank": {
+  "share": 14,
+  "amount": 478.0,
+  "time": "2019-08-28 15:24:11.702109"
+ },
+ "Lemnisk": {
+  "share": 8,
+  "amount": 78.0,
+  "time": "2019-08-28 15:35:07.431193"
+ },
+ "ThrowWorks": {
+  "share": 7,
+  "amount": 55.0,
+  "time": "2019-08-28 15:34:59.911334"
+ }
+}
