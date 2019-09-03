@@ -1,0 +1,65 @@
+[
+    {
+     "state": "uttar pradesh",
+     "phone_number": 8738864640,
+     "zip_code": 283110,
+     "city": "agra",
+     "address": "doora",
+     "first_name": "vishnu",
+     "last_name": "kuamr"
+    },
+    {
+     "state": "bihar",
+     "phone_number": 9303490394,
+     "zip_code": 748348,
+     "city": "koderma",
+     "address": "kamenu",
+     "first_name": "ravi",
+     "last_name": "Kumar"
+    },
+    {
+     "state": "Rajasthan",
+     "phone_number": 8923508154,
+     "zip_code": 680058,
+     "city": "Bhartpur",
+     "address": "bansi",
+     "first_name": "Ishwar",
+     "last_name": "Dayal"
+    },
+    {
+     "state": "Madhya pradesh",
+     "phone_number": 9616526195,
+     "zip_code": 282923,
+     "city": "Gwalior",
+     "address": "maniya",
+     "first_name": "Akash",
+     "last_name": "Agrawal"
+    },
+    {
+     "state": "new Delhi",
+     "phone_number": 8328492344,
+     "zip_code": 110002,
+     "city": "Delhi",
+     "address": "Anand vihar",
+     "first_name": "Suraj",
+     "last_name": "menan"
+    },
+    {
+     "state": "uttar pradesh",
+     "phone_number": 7173739274,
+     "zip_code": 220041,
+     "city": "jonpur",
+     "address": "bitau",
+     "first_name": "akhilesh",
+     "last_name": "kumar"
+    },
+    {
+     "state": "karnatka",
+     "phone_number": 9723874834,
+     "zip_code": 648392,
+     "city": "varanari",
+     "address": "tikri",
+     "first_name": "manish",
+     "last_name": "gautam"
+    }
+   ]
