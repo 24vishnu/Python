@@ -1,0 +1,13 @@
+	sudo -i -u postgres
+	system password
+	psql
+	\l (for display the list if databases)
+	CREATE DATABASE dbname;
+	\c dbname;
+	DROP DATABASE dbname;
+	CREATE TABLE table_name(   column1 datatype,   column2datatype,   column3 datatype,   .....  columnN datatype,  PRIMARY KEY( one or more columns ));
+	\d (list of tables)
+	\d table_name (descrive table details)
+	DROP TABLE table_name;
+	INSERT INTO TABLE_NAME (column1, column2, column3,...columnN) VALUES (value1, value2, value3,...valueN);
+	SELECT * FROM table_name;
