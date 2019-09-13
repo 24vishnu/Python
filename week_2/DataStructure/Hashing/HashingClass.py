@@ -1,4 +1,4 @@
-'''
+"""
 Desc ­> Create a Slot of 10 to store Chain of Numbers that belong to each Slot to
 efficiently search a number from a given set of number
 
@@ -12,14 +12,14 @@ In the Figure Below, you can see number 77/11 reminder is 0 hence sits in the 0
 slot while 26/11 remainder is 4 hence sits in slot 4
 
 O/P ­> Save the numbers in a file
-'''
+"""
 
 import HashingClassBL as hash_obj
 
 obj = hash_obj.Hashing()
 
-#read the data from file
-f = open("number.txt","r")
+# read the data from file
+f = open("number.txt", "r")
 data = f.read()
 f.close()
 
@@ -28,7 +28,7 @@ num = ''
 for i in data:
     if i == ' ':
         obj.addData(int(num))
-        num=''
+        num = ''
     else:
         num = num + i
 
@@ -39,7 +39,7 @@ print('Enter the number to search!  ')
 num = int(input())
 
 print(obj.search(num))
-f = open("Number.txt","w")
+f = open("Number.txt", "w")
 # f.write('\n\n')
 
 for i in range(len(obj.hashList)):
@@ -48,6 +48,3 @@ for i in range(len(obj.hashList)):
         f.write(' ')
 
     f.write('\n')
-
-
-    

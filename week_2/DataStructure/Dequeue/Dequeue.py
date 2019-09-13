@@ -1,10 +1,10 @@
-#program to check the sting is palindrom or not using dequeue using linked list
+# program to check the sting is palindrom or not using dequeue using linked list
 
 import DequeueBL as Dq_Obj
 import sys
 
 ob = Dq_Obj.DeQueue()
-string1 = input('Enter String to check palindrom : ')
+string1 = input('Enter String to check palindrome : ')
 
 for i in string1:
     ob.addFront(i)
@@ -16,4 +16,3 @@ while ob.size() > 1:
         sys.exit(0)
 
 print(True)
-  

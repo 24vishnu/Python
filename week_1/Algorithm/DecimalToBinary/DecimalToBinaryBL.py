@@ -3,14 +3,15 @@
 # date : 26/08/2019
 # Convert decimal to binary number
 
-def toBinary(n):
-    	
-	res = ''
 
-	while(n>0):
-		res = str(n%2) + res
-		n //= 2
-	
-	#return binary number as a string
-	return res
- 
+def toBinary(decimalNumber):
+    binaryNumber = ''
+
+    while decimalNumber > 0:
+        binaryNumber = str(decimalNumber % 2) + binaryNumber
+        decimalNumber //= 2
+
+    for i in range(len(binaryNumber), 32, 1):
+        binaryNumber = '0' + binaryNumber
+
+    return binaryNumber

@@ -6,11 +6,10 @@ import PermutationBL as obj
 # take user input
 string = input("Enter your string : ")
 
-# call recursive function for get permutaition of input
+# call recursive function for get permutation of input
 print('\nfollowing output using recursive method')
 obj.call_recursive(string)
 
-# call iterative function for get permutaition of input
+# call iterative function for get permutation of input
 print('\n\nfollowing output using iterative method')
 print(obj.iterative_permutation(string))
-	

@@ -4,11 +4,13 @@
 # print the prime number in two dimension 
 
 import math
+
 prim = []
+
 
 class primeIn2D:
 
-#check number is prime or not
+    # check number is prime or not
     @staticmethod
     def prime(n):
         if n < 2:
@@ -17,38 +19,34 @@ class primeIn2D:
         if n == 2:
             return True
 
-        for i in range(2,int(math.sqrt(n))):
-            if n%i == 0:
+        for i in range(2, int(math.sqrt(n))):
+            if n % i == 0:
                 return False
         return True
 
-
-#prime list in 2D
+    # prime list in 2D
     @staticmethod
     def primeList():
 
         stre = ''
         p = 0
-        stre = str(p)+' to '
+        stre = str(p) + ' to '
         p += 100
-        stre +=  str(p)+'    '
-          
-        temp_list = []
-        temp_list.append(stre)
+        stre += str(p) + '    '
 
-        for i in range(1,1000):
-            if(primeIn2D.prime(i) == True):
+        temp_list = [stre]
+
+        for i in range(1, 1000):
+            if primeIn2D.prime(i):
                 temp_list.append(i)
 
             if i % 100 == 0:
                 stre = ''
-                stre = str(p)+' to '
+                stre = str(p) + ' to '
                 p += 100
-                stre +=  str(p)+ '    '
+                stre += str(p) + '    '
 
                 prim.append(temp_list)
-                temp_list = []
-                temp_list.append(stre)
+                temp_list = [stre]
 
         prim.append(temp_list)
-

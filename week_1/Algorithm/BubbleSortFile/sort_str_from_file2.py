@@ -1,16 +1,14 @@
-'''
-Progeam for read the data from file and perfoming bubble sort
-'''
-
+"""
+Program for read the data from file and performing bubble sort
+"""
 
 import BubbleSortBl as ob
 
-#Open file
-with open("demo.txt") as f:
-	data = f.read()
+# read file and take data into string
+data = ob.read_file()
 
-    #call bubble sort function
-	ob.BSortingLogic(data)
+# convert file data into list of words
+list_data = ob.convert_words_list(data)
 
-#close file
-f.close()
+# call bubble sort function
+print(ob.bubbleSort(list_data))

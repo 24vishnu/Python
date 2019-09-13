@@ -6,55 +6,48 @@
 
 class BaseConvertor:
 
-    #Decimal to binary conversion method
+    # Decimal to binary conversion method
     @staticmethod
-    def dcimalToBinary(n):
+    def dcimalToBinary(number):
 
-        ans = ''
+        binary_value = ''
 
-        while(n>0):
-        	ans =str(n%2)+ans
-        	n //= 2
+        while number > 0:
+            binary_value = str(number % 2) + binary_value
+            number //= 2
 
-        return ans
+        return binary_value
 
-    # This method conver decimal to binary only less the or equal to 8 bit size binary representation
+    # This method convert decimal to binary only less the or equal to 8 bit size binary representation
     @staticmethod
-    def toBinary(n):
-
-        res = [0]*8
+    def toBinary(decimal_value):
+        binary_value = [0] * 8
         i = 7
+        while decimal_value > 0:
+            binary_value[i] = decimal_value % 2
+            decimal_value //= 2
+            i -= 1
 
-        while(n>0):
-            	res[i] = n%2
-            	n //= 2
-            	i -= 1
-
-        ans = ''
-
+        binary_value_result = ''
         for i in range(8):
-        	ans += str(res[i])
-        
-        return (ans)
-     
-    #Method for swap nibble
+            binary_value_result += str(binary_value[i])
+
+        return binary_value_result
+
+    # Method for swap nibble
     @staticmethod
     def swapNibbles(binary_value):
+        answer = ''
+        answer += binary_value[4:len(binary_value)]
+        answer += binary_value[0:4]
 
-    	res = ''
-    	res += binary_value[4:len(binary_value)]
-    	res += binary_value[0:4]
-
-    	return res
-
+        return answer
 
     # method for convert binary to decimal value
     @staticmethod
     def toDecimal(binary_value):
+        decimal_value = 0
+        for i in range(len(binary_value)):
+            decimal_value += (pow(2, i) * int(binary_value[(7 - i)]))
 
-    	ans = 0
-
-    	for i in range(len(binary_value)):
-    		ans += (pow(2,(i))* int(binary_value[(7-i)]))
-            
-    	return ans
+        return decimal_value

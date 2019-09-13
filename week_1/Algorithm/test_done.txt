@@ -1,0 +1,9 @@
+Anagram
+Anagram palindrome Prime
+BinarySearch AND sort
+BinarySwapNibble
+sorting file data using bubble sort
+week of day
+32 bit binary number
+merge sort
+Vending Machine

@@ -9,22 +9,25 @@
 #         else:
 #             file_obj.write(' ')
 
+
 def perm(l):
-        # Compute the list of all permutations of l
+    # Compute the list of all permutations of l
     if len(l) <= 1:
-                  return [l]
+        return [l]
     r = []
     for i in range(len(l)):
-            
-                s = l[:i] + l[i+1:]
-                p = perm(s)
-                for x in p:
-                    print(l[i:i+1] , x)
-                    r.append(l[i:i+1] + x)
+
+        s = l[:i] + l[i + 1:]
+        p = perm(s)
+        for x in p:
+            print(l[i:i + 1], x)
+            r.append(l[i:i + 1] + x)
     return r
+
+
 print(perm('123'))
 # perm('123')
 
 # 123     1 23
 # 23      2 3
-# 3       3 
+# 3       3
