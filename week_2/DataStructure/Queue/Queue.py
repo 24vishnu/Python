@@ -22,6 +22,6 @@ qu = QueueBL.Queue(quSize)
 print('Hi.. Manager what is the total money today in bank : ')
 bankBalance = int(input())
 
-remaningCase = qu.remaining_mony(bankBalance,quSize)
-print('now remaining money in the bank is : ',remaningCase)
+remaningCase = qu.remaining_mony(bankBalance, quSize)
+print('now remaining money in the bank is : ', remaningCase)
 

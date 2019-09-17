@@ -27,26 +27,23 @@ class primeIn2D:
     # prime list in 2D
     @staticmethod
     def primeList():
-
-        stre = ''
         p = 0
-        stre = str(p) + ' to '
+        num_range = str(p) + ' to '
         p += 100
-        stre += str(p) + '    '
+        num_range += str(p) + '      '
 
-        temp_list = [stre]
+        temp_list = [num_range]
 
         for i in range(1, 1000):
             if primeIn2D.prime(i):
                 temp_list.append(i)
 
             if i % 100 == 0:
-                stre = ''
-                stre = str(p) + ' to '
+                num_range = str(p) + ' to '
                 p += 100
-                stre += str(p) + '    '
+                num_range += str(p) + '    '
 
                 prim.append(temp_list)
-                temp_list = [stre]
+                temp_list = [num_range]
 
         prim.append(temp_list)

@@ -10,5 +10,4 @@ anagram_and_not_Anagram = [ob.ana_G, ob.not_ana_G]
 
 for i in anagram_and_not_Anagram:
     print(i)
-    print()
 

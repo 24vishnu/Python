@@ -1,7 +1,7 @@
 # ---------------------------------- prg-----------------------------------------------
 # linkedList.py
 # date : 26/08/2019
-# perform the linked list operastion as a sorting order add operation
+# perform the linked list operation as a sorting order add operation
 
 
 import random
@@ -20,7 +20,6 @@ class singleLinkedList:
     # This function use to initialize the empty list
     def __init__(self):
         self.head = None
-        # self.tail = None
         return
 
     # Function to find the length of list
@@ -54,7 +53,7 @@ class singleLinkedList:
             while temp.next is not None and temp.next.data < item.data:
                 temp = temp.next
 
-            if temp.next == None:
+            if temp.next is None:
                 temp.next = item
                 return
 
@@ -68,12 +67,15 @@ class singleLinkedList:
         temp = self.head
 
         while temp is not None:
-            print(temp.data, end='->')
+            if temp.next is None:
+                print(temp.data, end='-> None')
+            else:
+                print(temp.data, end='-> ')
             temp = temp.next
 
         print()
 
-    # function for seaching in the list
+    # function for searching in the list
     def searchItem(self, item):
 
         if self.head is None:
@@ -93,7 +95,7 @@ class singleLinkedList:
     # Function for remove the item from list
     def removeItem(self, item):
 
-        if self.head == None:
+        if self.head is None:
             print("List is empty.. ! ")
             return
 
@@ -105,15 +107,12 @@ class singleLinkedList:
                 print('DELETED1')
                 return
 
-            temp1 = None
-
             while temp.next is not None:
                 temp1 = temp
 
                 if temp.next.data == item:
                     print(temp.next.data, item)
                     temp1.next = temp.next.next
-                    temp = temp1.next
                     print('DELETED2')
                     return
 
@@ -122,19 +121,19 @@ class singleLinkedList:
 
     # Function to check list is empty or not..
     def isEmpty(self):
-        return self.head == None
+        return self.head is None
 
     # function to find the index of item in the list (assume item is present in the list)
     def itemIndex(self, item):
 
-        if self.head == None:
+        if self.head is None:
             print("List is empty !!\n")
             return -1
 
         count = -1
         temp = self.head
 
-        while temp != None:
+        while temp is not None:
             count += 1
             if temp.data == item:
                 return count
@@ -143,30 +142,28 @@ class singleLinkedList:
         print("Data not present in the list !!\n")
         return -1
 
-    # pop() function to remove last elemtnt if we pass position pop(position) then remove at the position of element
+    # pop() function to remove last element if we pass position pop(position) then remove at the position of element
     # and return this element from the list
     def pop(self, pos=None):
-        if self.head == None:
+        if self.head is None:
             print("List is Empty !!")
             return
 
-        if pos == None:
+        if pos is None:
             temp = self.head
-            if temp.next == None:
+            if temp.next is None:
                 ans = temp.data
                 self.head = None
                 return ans
 
             temp1 = None
 
-            while temp.next != None:
+            while temp.next is not None:
                 temp1 = temp
                 temp = temp.next
 
-            ans = temp.data
             temp1.next = None
-            temp.next = temp1
-            return ans
+            return temp.data
 
         else:
             temp = self.head
@@ -178,12 +175,12 @@ class singleLinkedList:
 
             temp1 = None
 
-            while pos > 0 and temp.next != None:
+            while pos > 0 and temp.next is not None:
                 temp1 = temp
                 temp = temp.next
                 pos -= 1
 
-            if (pos > 0):
+            if pos > 0:
                 print("Your position is grater than list size !! ")
                 return -1
 
@@ -197,9 +194,9 @@ class singleLinkedList:
 
         item = LinkedList(item)
 
-        if self.head == None and position > 0:
+        if self.head is None and position > 0:
             print(
-                "List is empty and your position is grater then size so we cosider this is first element and position "
+                "List is empty and your position is grater then size so we consider this is first element and position "
                 "is 0 : ")
 
             # return
@@ -207,18 +204,18 @@ class singleLinkedList:
                 self.head = item
                 return
 
-        if (position == 0):
+        if position == 0:
             item.next = self.head
             self.head = item
             return
 
         temp = self.head
-        while position > 1 and temp.next != None:
+        while position > 1 and temp.next is not None:
             position -= 1
             temp = temp.next
 
-        if temp.next == None and position > 1:
-            print("your position is grater then size so we cosider this is end element of list : ")
+        if temp.next is None and position > 1:
+            print("your position is grater then size so we consider this is end element of list : ")
             temp.next = item
             return
 
@@ -241,7 +238,7 @@ class singleLinkedList:
         with open('Number.txt', "w") as file_obj:
             temp = self.head
 
-            while temp != None:
+            while temp is not None:
                 count += 1
                 file_obj.write(str(temp.data))
                 if count % 15 == 0:

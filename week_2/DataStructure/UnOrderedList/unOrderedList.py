@@ -39,7 +39,7 @@ if ll_fun_obj.searchItem(item):
     print("Your Item is present in list :")
     ll_fun_obj.removeItem(item)
 
-# Else word not presernt then add the word into file and list
+# Else word not present then add the word into file and list
 else:
     print("Your Item is not present in list :")
     ll_fun_obj.add_list(item)

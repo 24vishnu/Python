@@ -28,3 +28,10 @@ class Hashing:
                 return True
 
         return False
+
+    # remove element from hash list
+    def remove_item(self, item):
+        if Hashing.search(item):
+            self.hashList.remove(item)
+        else:
+            print('Element not present in hash list')

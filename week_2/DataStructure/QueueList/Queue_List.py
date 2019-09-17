@@ -14,7 +14,6 @@ print('Following are the numbers enQueue into queue : ')
 for i in QLL_obj.anagram_list:
     print(i, end=' ')
     q.enQueue(i)
-    # q.display()
 
 print('\n\nFollowing are the numbers deQueue from queue : ')
 while q.size() > 0:

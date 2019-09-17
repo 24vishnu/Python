@@ -66,7 +66,7 @@ class stack_list:
     # Function for print the value of stack
     def display(self):
         temp = self.head
-        while temp != None:
+        while temp is not None:
             print('\t', temp.data)
             temp = temp.next
         print()
@@ -92,7 +92,7 @@ def prime(n):
 # make a list of prime numbers
 def primeList():
     for i in range(1, 1000):
-        if (prime(i) == True):
+        if prime(i):
             prim.append(i)
 
 
@@ -107,11 +107,11 @@ def anagram(a, b):
 
 primeList()
 
-# make a list of anagam numbers
+# make a list of anagram numbers
 for i in range(len(prim)):
     for j in range(len(prim)):
         if prim[i] is not prim[j]:
-            if (anagram(prim[i], prim[j]) == True):
+            if anagram(prim[i], prim[j]):
                 if prim[i] not in anagram_list:
                     anagram_list.append(prim[i])
                 if prim[j] not in anagram_list:

@@ -1,6 +1,5 @@
-[
-    {"Inventry": "Rice", "name": "basmati", "weight": 5, "price": 30.0},
-    {"Inventry": "Pulses", "name": "moong", "weight": 2, "price": 60.0},
-    {"Inventry": "Wheats", "name": "pahadi", "weight": 20, "price": 20.0},
-    {"Inventry": "Rice", "name": "mota", "weight": 2, "price": 15.0}
-]
+{
+    "Rice": [{"name": "basmati", "weight": 5, "price": 30.0},{"name": "mota", "weight": 2, "price": 15.0}],
+    "Pulses": [{ "name": "moong", "weight": 2, "price": 60.0}],
+    "Wheat": [{"name": "pahadi", "weight": 20, "price": 20.0}]
+}

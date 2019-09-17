@@ -36,7 +36,7 @@ class QueueList:
             return
 
         temp = self.head
-        while temp.next != None:
+        while temp.next is not None:
             temp = temp.next
 
         temp.next = item
@@ -65,7 +65,7 @@ class QueueList:
     def display(self):
         temp = self.head
 
-        while temp != None:
+        while temp is not None:
             print(temp.data)
             temp = temp.next
 
@@ -107,7 +107,7 @@ def anagram(a, b):
 
 primeList()
 
-# make a list of anagam numbers
+# make a list of anagram numbers
 for i in range(len(prim)):
     for j in range(len(prim)):
         if prim[i] is not prim[j]:

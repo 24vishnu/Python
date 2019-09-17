@@ -19,17 +19,15 @@ class ExtendePrimeClass:
         # Base conditions
         if n < 2:
             return False
-
         if n == 2:
             return True
-
         for i in range(2, int(math.sqrt(n))):
             if n % i == 0:
                 return False
 
         return True
 
-    # creatre a list of prime numbers
+    # create a list of prime numbers
     @staticmethod
     def primeList():
         for i in range(1, 1000):

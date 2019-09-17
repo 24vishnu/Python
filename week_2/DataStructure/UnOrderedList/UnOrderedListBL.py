@@ -1,7 +1,7 @@
 # ---------------------------------- prg-----------------------------------------------
 # linkeunOrderList.py
 # date : 26/08/2019
-# perform the linked list operastion as a unorder add operation
+# perform the linked list operations as a unordered add operation
 
 # This class for create a new node when calling there constructor with passing data (item)
 
@@ -52,10 +52,13 @@ class listFunctions:
         temp = self.head
 
         while temp is not None:
-            print(temp.data, end='-> ')
+            if temp.next is None:
+                print(temp.data, end='-> None')
+            else:
+                print(temp.data, end='-> ')
             temp = temp.next
 
-    # function for seaching in the list
+    # function for searching in the list
     def searchItem(self, item):
         if self.head is None:
             return False
@@ -209,7 +212,7 @@ class listFunctions:
 
     # Function write data in the file
     def writeFile(self):
-        with open('myFile.txt', "a") as file_obj:
+        with open('myFile.txt', "w") as file_obj:
             temp = self.head
 
             while temp is not None:

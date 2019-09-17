@@ -1,1 +1,6 @@
-[{"stock_name": "BidgeLabz", "stocks": 4, "stock_price": 20.0}, {"stock_name": "ThrowWorks", "stocks": 5, "stock_price": 55.0}, {"stock_name": "Lemniks", "stocks": 7, "stock_price": 78.0}, {"stock_name": "Itron", "stocks": 8, "stock_price": 478.0}]
+[
+  {"stock_name": "BidgeLabz", "stocks": 4, "stock_price": 20.0},
+  {"stock_name": "ThrowWorks", "stocks": 5, "stock_price": 55.0},
+  {"stock_name": "Lemniks", "stocks": 7, "stock_price": 78.0},
+  {"stock_name": "Itron", "stocks": 8, "stock_price": 478.0}
+]

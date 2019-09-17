@@ -1,4 +1,4 @@
-# program to check the sting is palindrom or not using dequeue using linked list
+# program to check the sting is palindrome or not using dequeue using linked list
 
 import DequeueBL as Dq_Obj
 import sys

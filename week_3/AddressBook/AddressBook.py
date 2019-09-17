@@ -1,12 +1,12 @@
-'''
+"""
 Create Object Oriented Analysis and Design of a simple Address Book Problem .
-'''
+"""
 
 import AddressBookBL as A_book_obj
 
 menu = A_book_obj.MenuBar()
 
-#Perform the user choice operations
+# Perform the user choice operations
 while True:
     print('Enter your choice : ')
     print('1.   Add New Person : ')
@@ -17,10 +17,10 @@ while True:
     print('6.   Edit Details : ')
     print('7.   save : ')
     print('8.   Exit : ')
-    #Enter user choice
+    # Enter user choice
     choice = int(input())
 
-    #check user choice and perform there required functionality
+    # check user choice and perform there required functionality
     if choice == 1:
         A_book_obj.book.append(menu.add_new_person())
 
@@ -38,7 +38,7 @@ while True:
         menu.sort_by_zip()
 
     elif choice == 6:
-        name = input('Enter first name for edit informatin : ')
+        name = input('Enter first name for edit information : ')
         menu.edit_information(name)
 
     elif choice == 7:

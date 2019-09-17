@@ -3,26 +3,24 @@
 # date : 26/08/2019
 # Implement the Dequeue using linked list
 
-import sys
-
 
 class DeQueue:
 
     # Constructor
     def __init__(self, cap=None):
         if cap is not None:
-            self.capasity = cap
+            self.capacity = cap
 
         else:
-            self.capasity = 10
+            self.capacity = 10
 
         self.front = 0
         self.rear = 0
-        self.queue = [-1] * self.capasity
+        self.queue = [-1] * self.capacity
 
     # Add Front
     def addFront(self, item):
-        if (self.rear - self.front) == self.capasity:
+        if (self.rear - self.front) == self.capacity:
             print('Queue is full')
             return
 
@@ -36,7 +34,7 @@ class DeQueue:
 
     # Add Rear
     def addRear(self, item):
-        if (self.rear - self.front) == self.capasity:
+        if (self.rear - self.front) == self.capacity:
             print('Queue is full')
             return
 

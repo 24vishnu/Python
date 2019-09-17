@@ -2,7 +2,7 @@ import Stack_List_BL as SLL_ob
 
 # --------------------------------------------------\
 st = SLL_ob.stack_list()
-print('Befor add in stack anagram numbers are : ')
+print('Before add in stack anagram numbers are : ')
 for i in range(len(SLL_ob.anagram_list)):
     print(SLL_ob.anagram_list[i], end=' ')
 
