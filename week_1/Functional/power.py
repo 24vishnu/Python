@@ -1,7 +1,10 @@
-n = int(input("Enter : "))
+num = int(input("Enter : "))
 
-def myp(n):
-	if(n == 0):
-		return 1
-	return 2 * myp(n-1)
-print(myp(n))
+
+def myp(num):
+    if num == 0:
+        return 1
+    return 2 * myp(num - 1)
+
+
+print(myp(num))

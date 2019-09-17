@@ -13,5 +13,6 @@ class test_Power_of_twoBL(unittest.TestCase):
         expected = 10
         self.assertEqual(expected, result)
 
+
 if __name__ == '__main__':
     test_Power_of_twoBL()

@@ -5,108 +5,107 @@
 
 
 import sys
-import Tic_Toc_ToeBL as ob
 
-#playing board
-arry2D = [] 								
+# playing board
+arry2D = []
 
-#fill every box of playing board as empty like '-'
-for i in range(0,3):						
-	arry2D.append([])						
+# fill every box of playing board as empty like '-'
+for i in range(0, 3):
+    arry2D.append([])
 
-for i in range(3):							
-	for j in range(3):
-		arry2D[i].append(j)					
-		arry2D[i][j] = '-'					
+for i in range(3):
+    for j in range(3):
+        arry2D[i].append(j)
+        arry2D[i][j] = '-'
+
 
 # print board status
 def print_game():
-	for i in range(3):						
-		for j in range(3):
-			print(arry2D[i][j],end=" ")
-		print()
+    for i in range(3):
+        for j in range(3):
+            print(arry2D[i][j], end=" ")
+        print()
+
 
 # add player choice value in board
-def put_value(x,y,ch):
-    	
-	if(ch == 0):
-		arry2D[x][y] = 'X'
-	else:
-		arry2D[x][y] = 'O'
+def put_value(x, y, ch):
+    if ch == 0:
+        arry2D[x][y] = 'X'
+    else:
+        arry2D[x][y] = 'O'
 
-# retrun false if position is already filled
-def check(x,y):
-	return arry2D[x][y]=='-'
+
+# return false if position is already filled
+def check(x, y):
+    return arry2D[x][y] == '-'
 
 
 # ++++++++++++++++++++++++++++++++++++++++++++
-#check winning condition
+# check winning condition
 def check_win(ch):
+    # // [0 0 0]
+    # // [1 1 1]
+    # // [2 2 2]
 
-	# // [0 0 0]
-	# // [1 1 1]
-	# // [2 2 2]
+    # Horizontal check
+    for i in range(3):
 
-# Horizontal check
-	for i in range(3):
-	
-		count = 0
-	
-		for j in range(3):
-	
-			if(arry2D[i][j] == ch):
-				count+=1
-			else:
-				break
-	
-		if(count == 3):
-			return True
+        count = 0
 
-# 	vertical check
-	for i in range(3):		
+        for j in range(3):
 
-		count = 0
+            if arry2D[i][j] == ch:
+                count += 1
+            else:
+                break
 
-		for j in range(3):
-			if(arry2D[j][i] == ch):
-				count+=1
-			else:
-				break
-	
-		if(count == 3):
-			return True
+        if count == 3:
+            return True
 
+    # 	vertical check
+    for i in range(3):
 
-# Diagonal 1
-	count = 0
+        count = 0
 
-	for i in range(3):
-		for j in range(3):
-	
-			if(i == j):
-	
-				if(arry2D[i][j] == ch):
-					count+=1
-				else:
-					break
-	
-		if(count == 3):
-			return True
+        for j in range(3):
+            if arry2D[j][i] == ch:
+                count += 1
+            else:
+                break
 
-# daigonal 2
-	count = 0
+        if count == 3:
+            return True
 
-	for i in range(3):
-		for j in range(3):
-	
-			if((i+j) == 2):
-	
-				if(arry2D[i][j] == ch):
-					count+=1
-				else:
-					break
-	
-		if(count == 3):
-			return True
-	
-	return False
+    # Diagonal 1
+    count = 0
+
+    for i in range(3):
+        for j in range(3):
+
+            if i == j:
+
+                if arry2D[i][j] == ch:
+                    count += 1
+                else:
+                    break
+
+        if count == 3:
+            return True
+
+    # diagonal 2
+    count = 0
+
+    for i in range(3):
+        for j in range(3):
+
+            if (i + j) == 2:
+
+                if arry2D[i][j] == ch:
+                    count += 1
+                else:
+                    break
+
+        if count == 3:
+            return True
+
+    return False
