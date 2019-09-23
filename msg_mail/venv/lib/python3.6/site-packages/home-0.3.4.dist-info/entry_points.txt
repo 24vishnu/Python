@@ -1,0 +1,3 @@
+[console_scripts]
+home = home.__main__:main
+
