@@ -74,6 +74,7 @@ ASGI_APPLICATION = 'mysite.routing.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # "ROUTING": "chat.routing.channel_routing",
         'CONFIG': {
             "hosts": [('127.0.0.1', 6379)],
         },
@@ -128,5 +129,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'udal1010singh@gmail.com'
+EMAIL_HOST_PASSWORD = 'password10101993'
+EMAIL_PORT = 587
 
 

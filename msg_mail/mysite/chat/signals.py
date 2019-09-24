@@ -1,6 +1,11 @@
+"""
+# Signals that fires when a user logs in and logs out
+# We're using the inbuilt user_logged_in and user_logged_out 
+# signals which fires whenever a user successfully logs in and log outs respectively.
+"""
+from chat.models import LoggedInUser
 from django.contrib.auth import user_logged_in, user_logged_out
 from django.dispatch import receiver
-from chat.models import LoggedInUser
 
 
 @receiver(user_logged_in)

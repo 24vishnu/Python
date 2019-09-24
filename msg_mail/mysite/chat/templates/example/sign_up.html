@@ -1,7 +1,10 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
+
   <form action="{% url 'example:sign_up' %}" method="post">
+    <center>
+      <h3> This is sign up user page </h3>
     {% csrf_token %}
     {% for field in form %}
       <div>
@@ -10,6 +13,7 @@
       </div>
     {% endfor %}
     <button type="submit">Sign up</button>
+    </center>
     <p>Already have an account? <a href="{% url 'example:log_in' %}">Log in!</a></p>
   </form>
 {% endblock content %}

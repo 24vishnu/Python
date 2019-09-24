@@ -4,17 +4,39 @@
     <meta charset="utf-8"/>
     <title>Chat Room</title>
 </head>
-<body>
+<body bgcolor="">
+<table  border="2">
+<tbody>
+<tr>
+<td><span style="color: #ff0000;">username</span></td>
+<td><span style="color: #ff0000;">user status</span></td>
+</tr>
+<tr></tr>
+{% for user in users %}
+<tr>
+<li data-username="{{ user.username|escape }}">
+    <td>{{ user.username|escape }}:</td><td> {{ user.status|default:'Offline' }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+<center>
     <textarea id="chat-log" cols="100" rows="20" style="background-color: #a39c9f;"></textarea><br/>
     <input id="chat-message-input" type="text" size="100" style="background-color:  #e33785;"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
+</center>
 </body>
 <script>
     var roomName = {{ room_name_json }};
+    var chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + roomName + '/');
 
-    var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onopen = function open() {
+      console.log('WebSockets connection created.');
+    };
+
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
