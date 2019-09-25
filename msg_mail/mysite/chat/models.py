@@ -7,4 +7,4 @@ User = get_user_model()
 
 class LoggedInUser(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='logged_in_user', on_delete=models.CASCADE)
+            settings.AUTH_USER_MODEL, related_name='logged_in_user', on_delete=models.CASCADE)

@@ -5,46 +5,33 @@
 
 	<head>
 		<title> home </title>
-		<link href="ExampleStyle.css" type="text/css" rel="stylesheet"/>
 		<style>
 			.outerDiv
 			{
-<!--				background-color: #006699;-->
-				color: #fff;
-				height: 40px;
+				background-color: #006699;
 				width: 600px;
 				margin: 0px auto;
-				padding: 5px;
+				padding: 1px;
 			}
 			.leftDiv
 			{
 				background-color: #efefef;
-				color: #000;
-				height: 40px;
-				width: 10%;
+				width: 30%;
 				float: left;
-			}
-			.midDiv
-			{
-				background-color: #006699;
-				color: #000;
-				height: 40px;
-				width: 10%;
-				float: center;
 			}
 			.rightDiv
 			{
 				background-color: #efefef;
-				color: #000;
-				height: 40px;
 				width: 30%;
-				float: ;
+				float: right;
 			}
 
 		</style>
 	</head>
+<hr>
 	<body style="text-align: center;">
-		<h1>This is chat app home page</h1>
+	<h1><font color="blue">This is chat app home page</font></h1>
+	<hr>
         <div class="outerDiv">
 			<div class="leftDiv">
 				<a href="{% url 'chat:home' %}">home</a>
@@ -52,8 +39,11 @@
 			<div class="rightDiv">
 				<a href="{% url 'example:log_in' %}">Login</a>
 			</div>
-			<div "style: clear:both;"></div>
+			<div style="background-color: #efefef;">
+				<a href="http://localhost:8000/admin/">admin</a>
+			</div>
         </div>
+	<hr>
     <a href="{% url 'example:sign_up' %}">Sign up!</a>
     </body>
 

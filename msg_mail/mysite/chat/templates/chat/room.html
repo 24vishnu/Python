@@ -14,7 +14,7 @@
 <tr></tr>
 {% for user in users %}
 <tr>
-<li data-username="{{ user.username|escape }}">
+    <br>
     <td>{{ user.username|escape }}:</td><td> {{ user.status|default:'Offline' }}</td>
 </tr>
 {% endfor %}
@@ -58,6 +58,7 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
+        message += ' username'
         chatSocket.send(JSON.stringify({
             'message': message,
             'command':'fetch_messages'

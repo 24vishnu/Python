@@ -2,16 +2,26 @@
 
 {% block content %}
 <center>
-  <a href="{% url 'example:log_out' %}">Log out</a>
+  <hr>
+  <a style="float: right;" href="{% url 'example:log_out' %}">Log out</a>
+  <hr>
   <br>
   <div>
-  <ul>
-    {% for user in users %}
-      <li data-username="{{ user.username|escape }}">
-        {{ user.username|escape }}: {{ user.status|default:'Offline' }}
-      </li>
-    {% endfor %}
-  </ul>
+  <table  border="2">
+<tbody>
+<tr>
+<td><span style="color: #ff0000;">username</span></td>
+<td><span style="color: #ff0000;">user status</span></td>
+</tr>
+<tr></tr>
+{% for user in users %}
+<tr>
+    <br>
+    <td>{{ user.username|escape }}:</td><td> {{ user.status|default:'Offline' }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
   </div>
   <p>create chat room for chat : <a href="{% url 'chat:index' %}">create room</a></p>
 </center>
