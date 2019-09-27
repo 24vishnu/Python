@@ -1,9 +1,10 @@
 import json
 
 import jwt
+from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
@@ -27,7 +28,7 @@ Following method is is used for display the all registered users
 """
 
 
-@login_required(login_url='home')
+@login_required(login_url='/')
 def user_list(request):
     # store all logged in users in to users object
     users = User.objects.select_related('logged_in_user')
@@ -99,13 +100,13 @@ def log_out(request):
 
 
 # following method is use for create a chat room by any register and logged in user
-@login_required
+@login_required(login_url='/login')
 def create_Chat_Room(request):
     return render(request, 'chat/index.html', {})
 
 
 # this method use for communication in a created chat room after creating it
-@login_required
+@login_required(login_url='/')
 def chat_room(request, room_name):
     users = User.objects.select_related('logged_in_user')
 
@@ -191,12 +192,37 @@ def reset_password(request, token):
         # return HttpResponse('you are not registered yet, please sign up first')
         user = None
     if user is not None:
-        # if user valid then activate user account and save
-        # =====
-        # ======
-        # user.save()
-        # form = SetPasswordForm(request)
-        return render(request, 'example/confirm_password.html')
+        context = {'userReset': user.username}
+        print(context)
+        return redirect('/resetpassword/' + str(user))
     else:
+
         # this link already activated or (this link was one time use )
         return render(request, template_name='chat/home.html')
+
+
+def new_password(request, userReset):
+    if request.method == 'POST':
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        if password1 != password2 or password2 == "" or password1 == "":
+            messages.info(request,"password does not match ")
+            return render(request, 'example/confirm_password.html')
+        else:
+            try:
+                user = User.objects.get(username=userReset)
+            except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+                # if this is not store in our database then user should have first signup because user in invalid
+                # return HttpResponse('you are not registered yet, please sign up first')
+                user = None
+            if user is not None:
+                # set password
+                user.set_password(password1)
+                # here we will save the user password in the database
+                user.save()
+                messages.info(request, "password reset done")
+                # return redirect('/login/')
+                return render(request, 'example/reset_done.html')
+    else:
+        return render(request, 'example/confirm_password.html')

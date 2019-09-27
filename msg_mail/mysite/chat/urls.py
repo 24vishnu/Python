@@ -10,7 +10,8 @@ from .views import (
                 home,
                 activate,
                 reset_link,
-                reset_password
+                reset_password,
+                new_password,
                 )
 
 app_name = 'chat'
@@ -24,5 +25,6 @@ urlpatterns = [
     url(r'^list/$', user_list, name='user_list'),
     path('chat/activate/<token>/', activate, name='activate'),
     path('chat/reset_password/<token>/', reset_password, name='activate'),
+    path('resetpassword/<userReset>', new_password, name="resetpassword"),
     path('', home, name='home')
 ]
