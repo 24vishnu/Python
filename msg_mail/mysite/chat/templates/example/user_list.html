@@ -3,32 +3,56 @@
 {% block content %}
 <center>
   <hr>
-  <a style="float: right;" href="{% url 'example:log_out' %}">Log out</a>
+    <a href="{% url 'example:log_out' %}"><p align="right"> Log out </p></a>
   <hr>
   <br>
+    <h1>Hi..  {{ user.username }}</h1>
+    <br>
   <div>
-  <table  border="2">
+
+  <table  border="2" align="left">
 <tbody>
 <tr>
 <td><span style="color: #ff0000;">username</span></td>
 <td><span style="color: #ff0000;">user status</span></td>
 </tr>
 <tr></tr>
-{% for user in users %}
+{% for uname in users %}
+ {% if uname.status == 'Online' %}
 <tr>
+
     <br>
-    <td>{{ user.username|escape }}:</td><td> {{ user.status|default:'Offline' }}</td>
+    <td width="100px"> <input id="{{ uname }}" type="button" class="{{ uname }}" value="{{ uname }}" style="width: 10em;"></td><td> {{ uname.status|default:'Offline' }}</td>
+   <br><br>
+         <script>
+            document.querySelector('#{{ uname }}').onclick = function (e) {
+                var uname=(document.querySelector('#{{ uname }}').className);
+                var roomname= (uname+ "{{ user.username }}");
+                var strroom = roomname.toString();
+                var z= strroom.split("").sort();
+                var dom='';
+                for (i=0;i<z.length;i++){
+                    dom=dom+z[i];
+                }
+                window.location.pathname = '/chat/' + dom + '/';
+            };
+         </script>
 </tr>
+{% endif %}
 {% endfor %}
 </tbody>
 </table>
   </div>
-  <p>create chat room for chat : <a href="{% url 'chat:index' %}">create room</a></p>
+    <p align="right">create chat room for chat : <a href="{% url 'chat:index' %}">create room</a></p>
 </center>
+
+
 {% endblock content %}
 
 {% block script %}
   <script>
+
+  var user = {{ username }};
     var socket = new WebSocket('ws://' + window.location.host + '/users/');
 
     socket.onopen = function open() {

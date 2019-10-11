@@ -13,6 +13,7 @@ from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SignupForm
+from .models import ChatRoom, LoggedInUser
 
 User = get_user_model()
 
@@ -110,10 +111,18 @@ def create_Chat_Room(request):
 def chat_room(request, room_name):
     users = User.objects.select_related('logged_in_user')
 
+    username = request.user
+
     for user in users:
         user.status = 'Online' if hasattr(user, 'logged_in_user') else 'off-line'
 
-    return render(request, 'chat/room.html', {"room_name_json": mark_safe(json.dumps(room_name)), 'users': users})
+    loggedusers = LoggedInUser.objects.all()        # new
+    messages = ChatRoom.objects.filter(room_name=room_name).values('message')       # new
+    message = list(messages)        # new
+
+    return render(request, 'chat/room.html',
+                  {"room_name_json": room_name, 'online user': loggedusers,
+                   'message': mark_safe(json.dumps(message)), 'users': users, 'username': username})
 
 
 """
@@ -207,7 +216,7 @@ def new_password(request, userReset):
         password2 = request.POST['password2']
 
         if password1 != password2 or password2 == "" or password1 == "":
-            messages.info(request,"password does not match ")
+            messages.info(request, "password does not match ")
             return render(request, 'example/confirm_password.html')
         else:
             try:
