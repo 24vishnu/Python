@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
-</head>
-<body bgcolor="">
+{% extends 'example/base.html' %}
+
+{% block content %}
+<div style="background-color:darkkhaki">
 <a href="{% url 'example:log_out' %}"><p style="text-align: right;">Log out</p></a>
 <hr>
   <h2 style="float: right;" > Group Name : <u style="color: green"> {{ room_name_json }}</u>
@@ -35,11 +32,12 @@
     <p>&nbsp;</p>
 <hr>
 <center>
-    <textarea id="chat-log" cols="100" rows="20" style="background-color: #a39c9f;"></textarea><br/>
+    <textarea id="chat-log" cols="100" rows="20" disabled="disabled" style="background-color: #a39c9f;"></textarea><br/>
     <input id="chat-message-input" type="text" size="100" style="background-color:  #e33785;"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
 </center>
-</body>
+</div>
+<!--</body>-->
 <script>
     var roomName = '{{ room_name_json }}';
     var user= '{{username}}';
@@ -84,4 +82,5 @@
         messageInputDom.value = '';
     };
 </script>
-</html>
+{% endblock content %}
+<!--</html>-->

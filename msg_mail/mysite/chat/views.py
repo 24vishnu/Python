@@ -1,4 +1,5 @@
 import json
+import logging
 
 import jwt
 from django.contrib import messages
@@ -6,17 +7,23 @@ from django.contrib.auth import get_user_model, login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 
+from .event_emitter import ee
 from .forms import SignupForm
-from .models import ChatRoom, LoggedInUser
+from .models import ChatRoom
 
 User = get_user_model()
-
+file_dir = __file__
+file_dir = file_dir.replace('views.py', 'chat_logfile.log')
+LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+logging.basicConfig(filename=file_dir,
+                    level=logging.DEBUG,
+                    format=LOG_FORMAT, filemode='w')
+logger = logging.getLogger()
 
 # home page for chat app
 def home(request):
@@ -39,11 +46,19 @@ def user_list(request):
     the given named attribute and return true if present, else false.
     hasattr(object, key)
     """
-
     # set user status
     for user in users:
         user.status = 'Online' if hasattr(user, 'logged_in_user') else 'Off-line'
-    return render(request, 'example/user_list.html', {'users': users})
+
+    username = request.user
+    all_rooms = ChatRoom.objects.all()
+    unique_rooms = []
+    for i in range(len(all_rooms.values())):
+        if all_rooms.values()[i]["room_name"] not in unique_rooms:
+            unique_rooms.append(all_rooms.values()[i]["room_name"])
+    # print(all_rooms)
+    logging.info('List of all users done with status')
+    return render(request, 'example/user_list.html', {'users': users, 'username': username, 'rooms': unique_rooms})
 
 
 """
@@ -57,45 +72,59 @@ def log_in(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        # check user is valid or not
+
         try:
+            # check user validation
+            if username == "" or password == "":
+                messages.info(request, "username / password field should not be empty!")
+                logging.error("username / password field should not be empty!")
+                raise Exception("username / password field should not be empty!")
+
+            # check user verification
+            user = authenticate(username=username, password=password)
+
             if user is not None:
                 # if valid then this user is authenticate and it able to go forward
                 # login_token = jwt.encode({username: password}, 'private_key', algorithm='HS256').decode('utf-8')
                 login(request, user)
+                logging.info("Login successfully")
                 return redirect(reverse('example:user_list'))
+            else:
+                messages.info(request, "Incurrect username / password")
+                logging.error("Incurrect username / password")
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            return render(request, 'example/log_in.html')
+            return redirect('/login')
     # if request is GET type then return same page
+    logging.info('Login view')
     return render(request, 'example/log_in.html')
 
 
 def reset_link(request):
-    # form = PasswordResetForm
+    form = PasswordResetForm
     if request.method == 'POST':
         # form = PasswordResetForm(request.POST)
         to_email = request.POST['email']
-        current_site = get_current_site(request)
+        try:
+            if not User.objects.filter(email=to_email).exists():
+                messages.info(request, "This email not registered/ register now")
+                raise Exception("Invalid Email address.")
+            current_site = get_current_site(request)
 
-        mail_subject = 'Reset your password.'
-        jwt_token = jwt.encode({'Email': to_email}, 'private_key', algorithm='HS256').decode("utf-8")
-        email = EmailMessage(
-            mail_subject,
-            'http://' + str(current_site.domain) + '/chat/reset_password/' + jwt_token + '/',
-            to=[to_email]
-        )
-        email.send()
-        return render(request, 'example/check_mail_link.html')
-    else:
-        form = PasswordResetForm()
-    return render(request, "example/reset_password.html",
-                  {"form": form})
+            mail_subject = 'Reset your password.'
+            jwt_token = jwt.encode({'Email': to_email}, 'private_key', algorithm='HS256').decode("utf-8")
+
+            mail_url = 'http://' + str(current_site.domain) + '/chat/reset_password/' + jwt_token + '/'
+            ee.emit('messageEvent', mail_subject, to_email, mail_url)
+            return render(request, 'example/check_mail_link.html')
+        except:
+            return redirect('/reset_link_send')
+    return render(request, "example/reset_password.html", {"form": form})
 
 
 # this method is accessible only when user is logged in
 @login_required(login_url='/login/')
 def log_out(request):
+    logging.info(str(request.user)+" : successfully logout.")
     logout(request)
     return redirect(reverse('example:log_in'))
 
@@ -116,13 +145,12 @@ def chat_room(request, room_name):
     for user in users:
         user.status = 'Online' if hasattr(user, 'logged_in_user') else 'off-line'
 
-    loggedusers = LoggedInUser.objects.all()        # new
-    messages = ChatRoom.objects.filter(room_name=room_name).values('message')       # new
-    message = list(messages)        # new
+    messages = ChatRoom.objects.filter(room_name=room_name).values('message')
+    message = list(messages)
 
     return render(request, 'chat/room.html',
-                  {"room_name_json": room_name, 'online user': loggedusers,
-                   'message': mark_safe(json.dumps(message)), 'users': users, 'username': username})
+                  {"room_name_json": room_name, 'message': mark_safe(json.dumps(message)), 'users': users,
+                   'username': username})
 
 
 """
@@ -152,14 +180,8 @@ def sign_up(request):
             # get user email from saved data
             to_email = form.cleaned_data.get('email')
 
-            # create a mail message with site url and token we are passing three argument subject url and user id
-            email = EmailMessage(
-                mail_subject,
-                'http://' + str(current_site.domain) + '/chat/activate/' + jwt_token + '/',
-                to=[to_email]
-            )
-            # now send the message
-            email.send()
+            mail_url = 'http://' + str(current_site.domain) + '/chat/activate/' + jwt_token + '/'
+            ee.emit('messageEvent', mail_subject, to_email, mail_url)
 
             return render(request, 'chat/mail_send.html')
     else:
@@ -215,23 +237,23 @@ def new_password(request, userReset):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
-        if password1 != password2 or password2 == "" or password1 == "":
-            messages.info(request, "password does not match ")
-            return render(request, 'example/confirm_password.html')
-        else:
-            try:
-                user = User.objects.get(username=userReset)
-            except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-                # if this is not store in our database then user should have first signup because user in invalid
-                # return HttpResponse('you are not registered yet, please sign up first')
-                user = None
-            if user is not None:
-                # set password
-                user.set_password(password1)
-                # here we will save the user password in the database
-                user.save()
-                messages.info(request, "password reset done")
-                # return redirect('/login/')
-                return render(request, 'example/reset_done.html')
+        try:
+            if password1 != password2 or password2 == "" or password1 == "":
+                messages.info(request, "password does not match ")
+                return render(request, 'example/confirm_password.html')
+
+            user = User.objects.get(username=userReset)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            # if this is not store in our database then user should have first signup because user in invalid
+            # return HttpResponse('you are not registered yet, please sign up first')
+            user = None
+        if user is not None:
+            # set password
+            user.set_password(password1)
+            # here we will save the user password in the database
+            user.save()
+            messages.info(request, "password reset done")
+            # return redirect('/login/')
+            return render(request, 'example/reset_done.html')
     else:
         return render(request, 'example/confirm_password.html')
